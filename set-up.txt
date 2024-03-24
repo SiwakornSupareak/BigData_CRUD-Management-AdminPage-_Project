@@ -1,0 +1,46 @@
+Run the node by using:
+$ concurrently "npm start --prefix node1" "npm start --prefix node2" "npm start --prefix node3"
+
+To be able to use this command you have to:
+
+1. Open PowerShell as Administrator:
+Right-click on the PowerShell icon and select "Run as administrator" from the context menu. This will open PowerShell with elevated privileges.
+
+2. Check Current Execution Policy:
+In the elevated PowerShell window, run the following command to check the current execution policy: 
+
+------------------------------------------------------------
+$ Get-ExecutionPolicy
+------------------------------------------------------------
+
+This command will return the current execution policy setting, which could be one of the following:
+- Restricted: Scripts are not allowed to run.
+- AllSigned: Scripts can run, but they must be signed by a trusted publisher.
+- RemoteSigned: Locally created scripts can run without a signature, but downloaded scripts must be signed by a trusted publisher.
+- Unrestricted: All scripts can run without any restrictions (not recommended for security reasons).
+
+3. Change Execution Policy (if needed):
+If the current execution policy is set to 'Restricted', you can change it to 'RemoteSigned' or 'Unrestricted' to allow script execution. Run one of the following commands based on your preference:
+
+To set the execution policy to RemoteSigned:
+
+------------------------------------------------------------
+$ Set-ExecutionPolicy RemoteSigned
+------------------------------------------------------------
+
+To set the execution policy to Unrestricted (not recommended for security reasons unless you understand the risks):
+
+------------------------------------------------------------
+$ Set-ExecutionPolicy Unrestricted
+------------------------------------------------------------
+
+After running the command, you may be prompted to confirm the change. Enter 'Y' (Yes) to confirm.
+
+4. Run concurrently Again:
+After changing the execution policy, try running the concurrently command again to see if the issue is resolved:
+
+------------------------------------------------------------
+$ concurrently --version
+------------------------------------------------------------
+
+This command should now execute without the "UnauthorizedAccess" error.
