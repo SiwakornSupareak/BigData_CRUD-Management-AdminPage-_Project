@@ -1,6 +1,7 @@
-<div class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Dashboard</h1>
-    <div class="btn-toolbar mb-2 mb-md 0">
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <!-- Fixed class name -->
         <div class="btn-group me-2">
             <a href="/add" class="btn btn-sm btn-outline-secondary">+ New Product</a>
         </div>
@@ -14,10 +15,7 @@
     </div>
     <% }) %>
 
-
-
         <div class="table-responsive">
-
             <table class="table table-striped table-sm">
                 <thead>
                     <tr>
@@ -25,43 +23,52 @@
                         <th scope="col">Name</th>
                         <th scope="col">Price</th>
                         <th scope="col">Status</th>
-                        <th scope="col" class="text-end">Action</th>
+                        <th scope="col" class="text-end">View &nbsp;&nbsp;&nbsp; Edit &nbsp;&nbsp;&nbsp; Delete</th>
                     </tr>
                 </thead>
-
                 <tbody>
-                    <% customers.forEach(element => { %>
+                    <% customers.forEach(customer => { %>
                         <tr class="align-middle">
                             <td>
-                                <%= element.brand %>
+                                <%= customer.brand %>
                             </td>
                             <td>
-                                <%= element.name %>
+                                <%= customer.name %>
                             </td>
                             <td>
-                                <%= element.price %>
+                                <%= customer.price %>
                             </td>
                             <td>
-                                <%= element.status %>
+                                <%= customer.status %>
                             </td>
                             <td class="text-end">
-
                                 <div class="d-flex flex-row justify-content-end gap-2">
-
-                                    <a href="/view/<%= element._id %>" type="button" class="btn btn-primary btn-small">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-
-                                    <a href="/edit/<%= element._id %>" type="button" class="btn btn-warning btn-small">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-
-                                    <form action="/edit/<%= element._id %>?_method=DELETE" method="POST" class="position-relative">
-                                        <button type="submit" class="btn btn-danger btn-small">
-                                        <i class="bi bi-person-x"></i>
-                                        
-                                    </button>
-                                    </form>
+                                    <a href="/view/<%= customer._id %>" class="btn btn-primary btn-small"><i class="bi bi-eye"></i></a>
+                                    <a href="/edit/<%= customer._id %>" class="btn btn-warning btn-small"><i class="bi bi-pencil"></i></a>
+                                    <!-- Modal Trigger Button -->
+                                    <button type="button" class="btn btn-danger btn-small" data-bs-toggle="modal" data-bs-target="#deleteModal<%= customer._id %>">
+                                <i class="bi bi-person-x"></i>
+                            </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="deleteModal<%= customer._id %>" tabindex="-1" aria-labelledby="deleteModalLabel<%= customer._id %>" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="deleteModalLabel<%= customer._id %>">Confirm Deletion</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>This will remove the product record of <b class="fw-bold"><%= customer.brand %> <%= customer.name %></b>.<br>Are you sure?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <form action="/edit/<%= customer._id %>?_method=DELETE" method="POST" class="position-relative">
+                                                        <button type="submit" class="btn btn-danger">Yes, Remove Product</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
@@ -70,23 +77,18 @@
             </table>
         </div>
 
-
-
         <% if (customers.length > 0) { %>
             <nav aria-label="Dashboard Pagination">
                 <ul class="pagination justify-content-center mt-5">
-
                     <% if (current == 1) { %>
                         <li class="page-item disabled"><a href="#" class="page-link">First</a></li>
                         <% } else { %>
                             <li class="page-item"><a href="/?page=1" class="page-link">First</a></li>
                             <% } %>
-
                                 <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
                                     <% if(i !== 1) { %>
                                         <li class="page-item disabled"><a href="#" class="page-link">...</a></li>
                                         <% } %>
-
                                             <% for(; i <= (Number(current) + 4) && i <= pages; i++ ) { %>
                                                 <% if (i == current) { %>
                                                     <li class="page-item disabled">
@@ -105,13 +107,11 @@
                                                                 <li class="page-item disabled"><a href="#" class="page-link">...</a></li>
                                                                 <% } %>
                                                                     <% } %>
-
                                                                         <% if (current == pages) { %>
                                                                             <li class="page-item disabled"><a href="#" class="page-link">Last</a></li>
                                                                             <% } else { %>
                                                                                 <li class="page-item"><a href="/?page=<%= pages %>" class="page-link">Last</a></li>
                                                                                 <% } %>
-
                 </ul>
             </nav>
             <% } %>

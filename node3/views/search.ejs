@@ -17,23 +17,23 @@
                     <th scope="col">Name</th>
                     <th scope="col">Price</th>
                     <th scope="col">Status</th>
-                    <th scope="col" style="text-align: right;">Action</th>
+                    <th scope="col" class="text-end">View &nbsp;&nbsp;&nbsp; Edit &nbsp;&nbsp;&nbsp; Delete</th>
                 </tr>
             </thead>
             <tbody>
                 <% customers.forEach(element => { %>
                     <tr class="align-middle">
                         <td>
-                            <%= element.firstName %>
+                            <%= element.brand %>
                         </td>
                         <td>
-                            <%= element.lastName %>
+                            <%= element.name %>
                         </td>
                         <td>
-                            <%= element.tel %>
+                            <%= element.price %>
                         </td>
                         <td>
-                            <%= element.email %>
+                            <%= element.status %>
                         </td>
                         <td>
 
