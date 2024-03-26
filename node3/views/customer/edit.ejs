@@ -93,13 +93,13 @@
             </div>
             <div class="modal-body">
                 <p>
-                    This will remove the product record of <b class="fw-bold"><%= customer.firstName %> <%= customer.lastName %></b><br/> Are you sure?
+                    This will remove the product record of <b class="fw-bold"><%= customer.brand %> <%= customer.name %></b><br/> Are you sure?
                 </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <form action="/edit/<%= customer._id %>?_method=DELETE" method="POST" class="position-relative">
-                    <button type="submit" class="btn btn-primary">Yes, Remove product</button>
+                    <button type="submit" class="btn btn-danger">Yes, Remove product</button>
                 </form>
             </div>
         </div>
