@@ -1,0 +1,16 @@
+{
+    "name": "crud_mongodb_final-project",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "client-install": "npm install --prefix client",
+        "start": "node server.js",
+        "server": "nodemon server.js",
+        "client": "cd ../ && npm start --prefix client",
+        "dev": "concurrently \"npm start --prefix node1\" \"npm start --prefix node2\" \"npm start --prefix node3\"",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC"
+}

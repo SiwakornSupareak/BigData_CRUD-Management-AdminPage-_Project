@@ -44,3 +44,10 @@ $ concurrently --version
 ------------------------------------------------------------
 
 This command should now execute without the "UnauthorizedAccess" error.
+
+************************************************************
+Short command to run many server.
+$ npm install concurrently
+
+$ npm run dev
+
